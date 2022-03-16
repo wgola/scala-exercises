@@ -1,4 +1,4 @@
-object zad01 {
+object lab01zad01 {
    def obramuj(napis: String): String = {
       val linijki: Array[String] = napis.split('\n')
       val najdluzsza: Int = linijki.maxBy(s => s.length).length
