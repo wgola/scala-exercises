@@ -24,9 +24,6 @@ def imp[A](p: Pred[A], q: Pred[A]): Pred[A] = {
     val mniejniz9 = (n: Int) => n < 9
 
     val And = and(wiecejniz5, mniejniz9)
-    val Or = or(wiecejniz5, mniejniz9)
-    val Not = not(wiecejniz5)
-    val Imp = imp(wiecejniz5, mniejniz9)
 
     println(And(5))
 }
