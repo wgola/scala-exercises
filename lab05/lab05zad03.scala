@@ -1,4 +1,7 @@
+import scala.annotation.tailrec
+
 def isOrdered[A](l: List[A])(leq: (A, A) => Boolean): Boolean = {
+    @tailrec
     def helper(lista: List[A], leq: (A, A) => Boolean, poprzedni: Option[A] = None): Boolean = {
         lista match {
             case element :: reszta => {
