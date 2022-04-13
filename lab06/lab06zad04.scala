@@ -1,6 +1,6 @@
 def remElems[A](seq: Seq[A], k: Int): Seq[A] = {
     val zipped = seq.zipWithIndex
-    val filtered = zipped.filter( (a, b) => b!= k - 1)
+    val filtered = zipped.filter( (a, b) => b != k - 1)
     val result = filtered.map( (a, b) => a)
     result
 }
