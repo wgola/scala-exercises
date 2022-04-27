@@ -1,6 +1,6 @@
 import scala.annotation.tailrec
 
-def isOrdered[A](seq: Seq[A])(leq:(A, A) => Boolean): Boolean = {
+def isOrdered2[A](seq: Seq[A])(leq:(A, A) => Boolean): Boolean = {
     val pary = seq.sliding(2, 1)
     @tailrec
     def helper(elementy: Iterator[Seq[A]], funkcja: (A, A) => Boolean, wynik: Boolean = true): Boolean = {
@@ -15,5 +15,5 @@ def isOrdered[A](seq: Seq[A])(leq:(A, A) => Boolean): Boolean = {
 }
 
 @main def lab6zad5(): Unit = {
-    println(isOrdered(Seq(1, 2, 2, 4))(_ <= _))
+    println(isOrdered2(Seq(1, 2, 2, 4))(_ <= _))
 }
