@@ -1,6 +1,8 @@
-def indices[A](l: List[A], el: A): Unit = {
+def indices[A](l: List[A], el: A): Set[Int] = {
     val x = l.zipWithIndex
     val y = x.groupMap(elem => elem(0))(elem => elem(1)).filter(elem => elem(0) == el)
+    if (y.nonEmpty) y(el).toSet
+    else Set()
 }
 
 @main def lab7zad4(): Unit = {
