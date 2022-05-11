@@ -1,27 +1,22 @@
+import scala.annotation.tailrec
+
 def MasterMind(secret: List[Int], guess: List[Int]): (Int, Int) = {
-    val trafione = secret.foldLeft(0)( (acc, elem) => {
-        val tmp = guess.takeWhile(n => n != elem)
-        if (tmp.size >= secret.size) acc
-        else acc + 1
-    })
+    val trafione = secret.intersect(guess).size
 
     val secretZipped = secret.zipWithIndex
     val guessZipped = guess.zipWithIndex
 
-    val test = for {
-        a <- secretZipped
-        b <- guessZipped if a == b
-    } yield b
+    val czarne = secretZipped.intersect(guessZipped).size
 
-    val black = test.size
-    val white = trafione - black
+    val biale = trafione - czarne
 
-    (black, white)
+    (czarne, biale)
 }
 
 @main def lab8zad1(): Unit = {
-    val secret = List(1, 1, 5, 3, 2, 6)
-    val guess = List(1, 2, 5, 2, 1, 3)
+    val secret = List(1, 3, 2, 2, 4, 5)
+    val guess = List(2, 1, 2, 4, 7, 2)
 
     println(MasterMind(secret, guess))
+
 }
