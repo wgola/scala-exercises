@@ -9,5 +9,4 @@ import scala.io.Source
         })
         acc + tmp
     })
-    
 }
