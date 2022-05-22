@@ -8,5 +8,7 @@ import scala.io.Source
             else acc1
         })
         acc + tmp
-    })
+    }).toList
+    val wynik = plik2.groupMap(n => n)
+    println(wynik)
 }
