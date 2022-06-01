@@ -15,14 +15,14 @@ class Szef extends Actor {
       } yield context.actorOf(Props[Pracownik](), s"Pracownik${x}")).toList
       context.become(oczekiwanie(p))
     }
-    case _ =>
+    case _ => 
   }
   def oczekiwanie(pracownicy: List[ActorRef]): Receive = {
     case Zlecenie(dane) => {
       context.become(wysylanie(dane, pracownicy, 0, dane.length, 0, pracownicy))
       self ! Start
     }
-    case _ =>
+    case _ => 
   }
   def wysylanie(
       dane: List[String],
@@ -39,7 +39,7 @@ class Szef extends Actor {
           context.become(wysylanie(resztaD, resztaP, wynik, ileLinii, ileDoszlo, wszyscyPracownicy))
           self ! Start
         }
-        case (_, _) =>
+        case (_, _) => 
       }
     case Wynik(n) if ileDoszlo + 1 < ileLinii =>
       dane match {
@@ -49,7 +49,7 @@ class Szef extends Actor {
             wysylanie(reszta, pracownicy, wynik + n, ileLinii, ileDoszlo + 1, wszyscyPracownicy)
           )
         }
-        case _ =>
+        case _ => 
           context.become(
             wysylanie(dane, pracownicy, wynik + n, ileLinii, ileDoszlo + 1, wszyscyPracownicy)
           )
@@ -58,7 +58,7 @@ class Szef extends Actor {
       println(wynik + n)
       context.become(oczekiwanie(wszyscyPracownicy))
     }
-    case _ =>
+    case _ => 
   }
 }
 
