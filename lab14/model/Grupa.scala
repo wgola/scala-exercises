@@ -21,6 +21,23 @@ object Grupa {
 }
 class Grupa(zawodnicy: List[ActorRef]) extends Actor {
   def receive: Receive = {
-    case msg => println(msg)
+    case Grupa.Runda => {
+      zawodnicy.foreach(z => z ! Zawodnik.Próba)
+      context.become(przeprowadzam(Map()))
+    }
+  }
+  def przeprowadzam(w: Map[ActorRef, Option[Ocena]]): Receive = {
+    case Grupa.Wynik(wynik) => {
+      val dodane = w + (sender() -> wynik)
+      context.parent ! Organizator.Wyniki(dodane)
+      context.become(przeprowadzam(dodane))
+    }
+    case Grupa.Wyniki => {
+      val udane = w.filter(n => n match { 
+          case (aktor, wynik) if wynik == None => false
+          case _ => true 
+        })
+      sender() ! Organizator.Wyniki(udane)
+    }
   }
 }

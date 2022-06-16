@@ -26,17 +26,20 @@ def lab14zad1: Unit = {
           organizator ! Organizator.Start
         case "eliminacje" =>
           // polecenie rozegrania rundy eliminacyjnej
-        case "finał" =>
+          organizator ! Organizator.Runda
+        case "final" =>
           // polecenie rozegrania rundy finałowej
           // wymaga zamknięcia Rundy eliminacyjnej i utworzenie
           // Rundy finałowej, zawierającej najlepszych 20.
           // zawodników z Rundy eliminacyjnej
+          organizator ! Organizator.Runda
         case "wyniki" =>
           // żądanie rankingów (lub rankingu finałowego)
+          organizator ! Organizator.Wyniki
         case "stop" =>
           organizator ! Organizator.Stop
           break()
-        case _ =>
+        case _ => println("złe polecenie")
       }
     }
   }
